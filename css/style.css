@@ -1,0 +1,61 @@
+body{
+    background-color: #dfdddd;
+    overflow: hidden;
+}
+
+.options{
+    width: 300px;
+    margin: 80px auto;  
+   
+}
+
+#game-box{
+    width: 300px;
+    margin: 100px auto;
+    box-shadow: 2px  2px  2px 2px black;
+    margin-bottom: 0px !important; 
+}
+
+
+
+.row{
+    display: flex;
+    margin: 0 !important;
+}
+
+.box{
+    padding: 30px;
+    height: 100px;
+    text-align: center;
+    width: 100px;
+    background: white;
+    cursor: pointer;
+    text-transform: capitalize;
+    transition: 200;
+}
+
+.box:active{
+    background: rgb(199, 87, 87); 
+}
+.one{
+    border-right: 2px solid hsl(0, 0%, 35%);
+    border-bottom: 2px solid hsl(0, 0%, 35%);
+}
+
+.two{
+    border-bottom: 2px solid hsl(0, 0%, 35%);
+}
+
+.five{
+    border-right: 2px solid hsl(0, 0%, 35%);
+}
+
+.three{
+    border-left: 2px solid hsl(0, 0%, 35%);
+    border-bottom: 2px solid hsl(0, 0%, 35%);
+}
+
+.last{
+    border-left: 2px solid hsl(0, 0%, 35%);
+
+}

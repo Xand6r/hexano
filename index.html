@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>X and O</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../../libraries/materialize/css/materialize.min.1.css">
+</head>
+<body>
+    <div id="app">
+        <nav>
+            <div class="nav-wrapper">
+                <ul class="left">
+                    <li v-show="gameStatus=='started'"><a href="#!" class="flow-text">Turn: {{turn}}</a></li>
+                </ul>
+                <ul class="brand-logo left">
+                    <li v-show="gameStatus!='started'"><a href="#!" class="flow-text">{{headerInfo}}</a></li>
+                    <!-- <li><a href="#!" class="flow-text">{{playerId}}</a></li> -->
+                </ul>
+                <ul class="right">
+                    <li v-show="gameStatus!='notStarted'"><a href="#!">computer:{{computerScore}}</a></li>
+                    <li v-show="gameStatus!='notStarted'"><a href="#!">you:{{userScore}}</a></li>
+                </ul>
+            </div>
+        </nav>
+
+        <div id="game-box">
+            <div class="row">
+                <div @click="play(0)" class="flow-text box one">{{board[0]}}</div>
+                <div @click="play(1)" class="flow-text box two">{{board[1]}}</div>
+                <div @click="play(2)" class="flow-text box three">{{board[2]}}</div>
+            </div>
+            <div class="row">
+                <div @click="play(3)" class="flow-text box one">{{board[3]}}</div>
+                <div @click="play(4)"v class="flow-text box two">{{board[4]}}</div>
+                <div @click="play(5)" class="flow-text box three">{{board[5]}}</div>
+            </div>
+            <div class="row">
+                <div @click="play(6)" class="flow-text box five">{{board[6]}}</div>
+                <div @click="play(7)" class="flow-text box">{{board[7]}}</div>
+                <div @click="play(8)" class="flow-text box last">{{board[8]}}</div>
+            </div>
+        </div>
+
+        <div class="options">
+            <div class="btn" @click="start()">start</div>
+        </div>
+    </div>
+</body>
+<script src="../../libraries/vue/vue.js"></script>
+<script src="../../libraries/jquery/jquery-3.3.1.js"></script>
+<script src="../../libraries/materialize/js/materialize.min.js"></script>
+<script src="./js/script.js"></script>
+</html>
