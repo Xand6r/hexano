@@ -10,7 +10,8 @@ const app=new Vue({
         computerId:null,
         firstPlay:true,
         userScore:0,
-        computerScore:0
+        computerScore:0,
+        level:null
     },
     methods:{
         error(str,t){
@@ -26,19 +27,29 @@ const app=new Vue({
             this.firstPlay=true;
             
         },
+        restart(){
+            this.board=["","","","","","","","",""];
+            this.gameStatus="started"
+        },
         start(){
-            player=prompt("do you want to play first(y/n)").toLowerCase();
+            let player=prompt("do you want to play first(y/n)").toLowerCase();
             if(player!="y" && player!="n"){
                 this.error("please enter 'y' or 'n'");
                 return;
             }
+            let level=Number(prompt("enter the level you'ld like to play on (1-3)"));
+            if(level<1 || level>3){
+                this.error("enter a level between 1 and 3");
+                return;
+            }
+            this.level=level;
             this.reset();
             this.gameStatus="started";
             this.playerId=(player=="y")?1:2;
             this.computerId=(player=="y")?2:1
             if (player=="n"){
                 this.turn="computer";
-                this.computerPlay2();
+                this.computerPlay();
             }
             else{
                 this.turn="human";
@@ -61,7 +72,7 @@ const app=new Vue({
                     this.checkForWinner();
                     if(this.gameStatus!="ended"){
                         this.turn="computer";
-                        this.computerPlay2();    
+                        setTimeout(()=>this.computerPlay(),500);
                     }
                 }
                 else{
@@ -74,9 +85,6 @@ const app=new Vue({
             }
 
         },
-       getBestPlay(){
-            return Math.floor(Math.random()*9);
-       },
        isPlayable(index){
            return this.board[index]=="";
        },
@@ -177,7 +185,7 @@ const app=new Vue({
         },
        computerPlay1(){
             do {
-                randPoint=this.getBestPlay()
+                randPoint=Math.floor(Math.random()*9);
             } while (!this.isPlayable(randPoint));
             this.board[randPoint]=this.playable[this.computerId-1];
             this.checkForWinner();
@@ -254,12 +262,44 @@ const app=new Vue({
             }
             else{
                 for(let index=0;index<this.board.length;index++){
+                    if(this.isPlayable(index)){
+                        let vt=this.calcVertical(index,myToken,otherToken);
+                        let dg=this.calcDiagonal(index,myToken,otherToken);
+                        let hr=this.calcHorizontal(index,myToken,otherToken);
+
+                        let tempScore=Math.max(vt,dg,hr);
+                        // loss function is the total loss across the board;
+                        if(tempScore>bestScore){
+                            bestScore=tempScore;
+                            bestIndex=index;
+                        }
+                        // console.log(`index:${index},v-point:${vt},h-point:${hr},d-point:${dg}`,vt+hr+dg)
+                    }
+                    
+                }
+                // console.log(bestIndex);
+                this.board[bestIndex]=this.playable[this.computerId-1];
+                this.checkForWinner();
+                this.turn="human";
+            }
+       },
+       computerPlay3(){
+           let bestScore=-Infinity;
+           let bestIndex=0;
+
+           let myToken=this.playable[this.computerId-1];
+           let otherToken=this.playable[this.playerId-1];
+            if(this.firstPlay){
+                this.computerPlay1();
+                this.firstPlay=false;
+            }
+            else{
+                for(let index=0;index<this.board.length;index++){
                     if(this.board[index]==""){
                         let vt=this.calcVertical(index,myToken,otherToken);
                         let dg=this.calcDiagonal(index,myToken,otherToken);
                         let hr=this.calcHorizontal(index,myToken,otherToken);
 
-                        // let tempScore=Math.max(vt,dg,hr);
                         // loss function is the total loss across the board;
                         let tempScore=vt+dg+hr;
                         if(tempScore>bestScore){
@@ -275,6 +315,11 @@ const app=new Vue({
                 this.checkForWinner();
                 this.turn="human";
             }
+       },
+       computerPlay(){
+           let plays=[this.computerPlay1,this.computerPlay2,this.computerPlay3];
+           plays[this.level-1]();
        }
+
     }
 })

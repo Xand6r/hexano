@@ -45,7 +45,8 @@
         </div>
 
         <div class="options">
-            <div class="btn" @click="start()">start</div>
+            <div class="btn"  @click="start()">reset</div>
+            <div class="btn" v-show="gameStatus=='ended'" @click="restart()">restart</div>
         </div>
     </div>
 </body>

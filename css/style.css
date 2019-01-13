@@ -16,7 +16,9 @@ body{
     margin-bottom: 0px !important; 
 }
 
-
+.btn:first-child{
+    margin-right: 40px !important;
+}
 
 .row{
     display: flex;
