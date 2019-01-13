@@ -33,6 +33,7 @@ const app=new Vue({
             this.board=["","","","","","","","",""];
             this.winningBox=[0,0,0,0,0,0,0,0,0];
             this.gameStatus="started";
+            this.firstPlay=true;
         },
         start(){
             let player=prompt("do you want to play first(y/n)").toLowerCase();
