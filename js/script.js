@@ -3,6 +3,7 @@ const app=new Vue({
     data:{
         gameStatus:"notStarted",
         board:["x","o","x","x","x","o","o","o","o"],
+        winningBox:[0,0,0,0,0,0,0,0,0],
         playable:["x","o"],
         headerInfo:"X and O",
         turn:"",
@@ -20,6 +21,7 @@ const app=new Vue({
         },
         reset(){
             this.board=["","","","","","","","",""];
+            this.winningBox=[0,0,0,0,0,0,0,0,0];
             this.error("game has been reset",1500);
             this.currentPlayer=null;
             this.playerId=null;
@@ -29,7 +31,8 @@ const app=new Vue({
         },
         restart(){
             this.board=["","","","","","","","",""];
-            this.gameStatus="started"
+            this.winningBox=[0,0,0,0,0,0,0,0,0];
+            this.gameStatus="started";
         },
         start(){
             let player=prompt("do you want to play first(y/n)").toLowerCase();
@@ -97,6 +100,7 @@ const app=new Vue({
                 else{
                     this.computerScore+=1;
                 }
+                this.winningBox[0]=this.winningBox[1]=this.winningBox[2]=1
                 this.headerInfo=`winner:${winner}`;
                 this.gameStatus="ended";
             }
@@ -108,10 +112,12 @@ const app=new Vue({
                 else{
                     this.computerScore+=1;
                 }
+                this.winningBox[3]=this.winningBox[4]=this.winningBox[5]=1
                 this.headerInfo=`winner:${winner}`;
                 this.gameStatus="ended";
             }
             else if(this.board[7]==this.board[6] && this.board[8]==this.board[6] && this.board[6]!=""){
+                
                 winner=(this.playable.indexOf(this.board[7])+1==this.playerId)?"you":"computer";
                 if(winner=="you"){
                     this.userScore+=1;
@@ -119,6 +125,7 @@ const app=new Vue({
                 else{
                     this.computerScore+=1;
                 }
+                this.winningBox[6]=this.winningBox[7]=this.winningBox[8]=1
                 this.headerInfo=`winner:${winner}`;
                 this.gameStatus="ended";
             }
@@ -130,6 +137,7 @@ const app=new Vue({
                 else{
                     this.computerScore+=1;
                 }
+                this.winningBox[0]=this.winningBox[3]=this.winningBox[6]=1
                 this.headerInfo=`winner:${winner}`;
                 this.gameStatus="ended";
             }
@@ -141,6 +149,7 @@ const app=new Vue({
                 else{
                     this.computerScore+=1;
                 }
+                this.winningBox[1]=this.winningBox[4]=this.winningBox[7]=1
                 this.headerInfo=`winner:${winner}`;
                 this.gameStatus="ended";
             }
@@ -152,6 +161,7 @@ const app=new Vue({
                 else{
                     this.computerScore+=1;
                 }
+                this.winningBox[2]=this.winningBox[5]=this.winningBox[8]=1
                 this.headerInfo=`winner:${winner}`;
                 this.gameStatus="ended";
             }
@@ -163,6 +173,7 @@ const app=new Vue({
                 else{
                     this.computerScore+=1;
                 }
+                this.winningBox[0]=this.winningBox[4]=this.winningBox[8]=1
                 this.headerInfo=`winner:${winner}`;
                 this.gameStatus="ended";
             }
@@ -174,10 +185,11 @@ const app=new Vue({
                 else{
                     this.computerScore+=1;
                 }
+                this.winningBox[2]=this.winningBox[4]=this.winningBox[6]=1
                 this.headerInfo=`winner:${winner}`;
                 this.gameStatus="ended";
             }
-            if(this.board.indexOf("")==-1){
+            else if(this.board.indexOf("")==-1){
                 this.headerInfo="its a  draw"
                 this.gameStatus="ended";
             }
