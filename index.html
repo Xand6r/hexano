@@ -28,19 +28,19 @@
 
         <div id="game-box">
             <div class="row">
-                <div @click="play(0)"  v-bind:class="{'red lighten-2 white-text':winningBox[0]}"  class="flow-text box one">{{board[0]}}</div>
-                <div @click="play(1)"  v-bind:class="{'red lighten-2 white-text':winningBox[1]}"  class="flow-text box two">{{board[1]}}</div>
-                <div @click="play(2)"  v-bind:class="{'red lighten-2 white-text':winningBox[2]}"  class="flow-text box three">{{board[2]}}</div>
+                <div @click="play(0)"  v-bind:class="{'green lighten-2 white-text':winningBox[0]==1,'red lighten-2 white-text':winningBox[0]==2}" class="flow-text box one">{{board[0]}}</div>
+                <div @click="play(1)"  v-bind:class="{'green lighten-2 white-text':winningBox[1]==1,'red lighten-2 white-text':winningBox[1]==2}" class="flow-text box two">{{board[1]}}</div>
+                <div @click="play(2)"  v-bind:class="{'green lighten-2 white-text':winningBox[2]==1,'red lighten-2 white-text':winningBox[2]==2}" class="flow-text box three">{{board[2]}}</div>
             </div>
             <div class="row">
-                <div @click="play(3)"  v-bind:class="{'red lighten-2 white-text':winningBox[3]}"  class="flow-text box one">{{board[3]}}</div>
-                <div @click="play(4)"  v-bind:class="{'red lighten-2 white-text':winningBox[4]}"  class="flow-text box two">{{board[4]}}</div>
-                <div @click="play(5)"  v-bind:class="{'red lighten-2 white-text':winningBox[5]}"  class="flow-text box three">{{board[5]}}</div>
+                <div @click="play(3)"  v-bind:class="{'green lighten-2 white-text':winningBox[3]==1,'red lighten-2 white-text':winningBox[3]==2}" class="flow-text box one">{{board[3]}}</div>
+                <div @click="play(4)"  v-bind:class="{'green lighten-2 white-text':winningBox[4]==1,'red lighten-2 white-text':winningBox[4]==2}" class="flow-text box two">{{board[4]}}</div>
+                <div @click="play(5)"  v-bind:class="{'green lighten-2 white-text':winningBox[5]==1,'red lighten-2 white-text':winningBox[5]==2}" class="flow-text box three">{{board[5]}}</div>
             </div>
             <div class="row">
-                <div @click="play(6)"  v-bind:class="{'red lighten-2 white-text':winningBox[6]}"  class="flow-text box five">{{board[6]}}</div>
-                <div @click="play(7)"  v-bind:class="{'red lighten-2 white-text':winningBox[7]}"  class="flow-text box">{{board[7]}}</div>
-                <div @click="play(8)"  v-bind:class="{'red lighten-2 white-text':winningBox[8]}"  class="flow-text box last">{{board[8]}}</div>
+                <div @click="play(6)"  v-bind:class="{'green lighten-2 white-text':winningBox[6]==1,'red lighten-2 white-text':winningBox[6]==2}" class="flow-text box five">{{board[6]}}</div>
+                <div @click="play(7)"  v-bind:class="{'green lighten-2 white-text':winningBox[7]==1,'red lighten-2 white-text':winningBox[7]==2}" class="flow-text box">{{board[7]}}</div>
+                <div @click="play(8)"  v-bind:class="{'green lighten-2 white-text':winningBox[8]==1,'red lighten-2 white-text':winningBox[8]==2}" class="flow-text box last">{{board[8]}}</div>
             </div>
         </div>
 
